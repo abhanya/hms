@@ -1,0 +1,29 @@
+{% extends 'pages\patienthome.html' %}
+{% load static %}
+{% block content%}
+<div class="col-8 mx-auto my-auto">
+    <div class="container">
+        <div class="col sm-8 md-6">
+            <div class="card shadow border p-3 mt-5 mb-5">
+                <div class="row card-header">
+                    <div class="col-md-9">
+                        name : {{ pres.patient.pat_name }} <br>
+                        age : {{ pres.patient.age }}<br>
+                        date : {{ pres.discription_date}}
+                    </div>
+                    <div class="col-md-3">
+                       <b> Dr.{{ pres.doctor.doc_name }} </b><br>
+                        ph : {{ pres.doctor.doc_phone }} <br>
+                        {{ pres.doctor.doc_email }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mx-5 my-5">
+                        {{ pres.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

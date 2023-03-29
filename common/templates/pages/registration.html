@@ -1,0 +1,88 @@
+{% extends 'pages\commonhome.html' %}
+{% load static %}
+{% block content%}
+<form method='POST' id="registration-form"> 
+    {% csrf_token %}     
+          <div class="col-8 mx-auto my-auto">
+            <div class="container">
+              <div class="col sm-8 md-6">
+                <h4 class="mt-5 ">Patient Registration form</h4>
+                <div class="card shadow border p-3 mt-5">
+                    <label for="exampleInputEmail1" class="form-label">name</label>
+                    <input type="text" class="form-control " id="name" name="p_name">
+                
+                    <label for="exampleInputEmail1" class="form-label">address</label>
+                    <textarea class="form-control " id="address" rows="3" name="p_add"></textarea>
+                
+                    <label for="" class="form-label">Gender :</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="p_gender" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male">
+                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="p_gender" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female">
+                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="p_gender" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="other                                       ">
+                        <label class="form-check-label" for="inlineRadio3">Other</label>
+                        </div><br>
+
+                    <label for="exampleInputEmail1" class="form-label">age </label>
+                    <input type="number" class="form-control " id="" name="page">
+        
+                    <label for="exampleInputEmail1" class="form-label">phone</label>
+                    <input type="text" class="form-control " id="" name="pphon">
+                
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control " id="patemail" name="pemail">
+                    <span id="e_error"></span>
+                
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control "  name="p_pass"><br>
+                {{ msg }}
+                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+  <script>
+    $('#patemail').change(function(){
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val() 
+            }
+        })
+
+        $.ajax({
+
+            url:'{% url "common:pemailexist" %}', 
+            type:'POST',    
+            data:{                           
+                email:$(this).val()
+            },
+            success:function(response){
+                var email_err = document.getElementById('e_error')
+                var email = document.getElementById('email')
+
+                if(response.status == true){
+                    email_err.innerHTML = "Email already exist"
+                    email_err.style.color = 'red'
+                    patemail.style.border = '1px solid red'
+                }
+                else{
+                    email_err.innerHTML = "succsess"
+                    email_err.style.color = 'green'
+                    patemail.style.border = '1px solid green'
+                    $('#registration-form').off('submit').submit();
+                }
+               
+            }
+
+        })
+    })
+  </script>
+  {% endblock %}

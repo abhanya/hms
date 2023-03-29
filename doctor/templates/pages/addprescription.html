@@ -1,0 +1,44 @@
+{% extends 'pages\doctorhome.html' %}
+{% load static %}
+{% block content%}
+<form method='POST'> 
+    {% csrf_token %}     
+          <div class="col-8 mx-auto my-auto">
+            <div class="container">
+              <div class="col sm-8 md-6">
+                <div class="card shadow border p-3 mt-5 mb-5">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="mb-3">
+                        <input type="number" hidden id="" name="docid">
+
+                        <label for="exampleInputEmail1" class="form-label">Name of patient</label>
+                        <input type="text" class="form-control w-75" id="patient-name" name="patientname" value="{{ patient.pat_name }}" readonly>
+                      </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Symptoms</label>
+                        <input type="text" class="form-control w-75" id="exampleInputEmail1" aria-describedby="emailHelp" name="patientsym" value="{{ appointment.symptoms }}" readonly>
+                    </div>    
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3 ms-5">
+                        <label for="exampleInputEmail1" class="form-label">Date</label>
+                        <input type="text" class="form-control " id="patient-name" name="bdate" value="{{appointment.booking_date}}">
+                      </div>
+                    </div>
+                  </div> 
+                  
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Add description</label>
+                    <textarea name="prescribtion" id="" class="form-control" cols="30" rows="10"></textarea>
+                </div> 
+                <button type="submit" class="btn btn-success" id="submit">Add</button>
+                
+                    
+                </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+  </form>
+{% endblock %}

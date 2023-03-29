@@ -1,0 +1,51 @@
+{% extends 'pages/adminhome.html' %}
+{% load static %}
+{% block content %}
+<div class="col-9 mt-5">
+<div class="text-center p-4">
+    <h4>APPROVE DOCTORS</h4>
+</div>
+<div class="container">
+<div class="row">
+    
+    <div class="">
+        <table class="table border shadow p-3">
+            <thead style="background:green;">
+            <th>Name</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>State</th>
+            <th>Specialisation</th>
+            <th>Status</th>
+            <th>Remove</th>
+            </thead>
+            <tbody>
+                {% for doctor in doclist %}
+                <tr class="table-light">
+                    <td>{{doctor.doc_name|upper}}</td>
+                        <td>{{doctor.doc_address}}</td>
+                        <td>{{doctor.doc_gender}}</td>
+                        <td>{{doctor.doc_dob}}</td>
+                        <td>{{doctor.doc_email}}</td>
+                        <td>{{doctor.doc_phone}}</td>
+                        <td>{{doctor.doc_state}}</td>
+                        <td>{{doctor.department.departments}}</td>  
+                        <td>       
+                        <button type="button" class="btn btn-success "><a href="{% url 'projectadmin:approvdoc' doctor.id %} "class="link-light"> approve</button></td>                    
+                    <td>
+                        <button type="button" class="btn btn-danger"><a href="{% url 'projectadmin:dispprove' doctor.id %} "class="link-light">remove</button></td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</div>
+<div>
+</div>
+{% endblock %}

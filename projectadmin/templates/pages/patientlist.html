@@ -1,0 +1,42 @@
+{% extends 'pages\adminhome.html' %}
+{% load static %}
+{% block content%}
+<div class="col-10 mt-5">
+    <div class="text-center p-4">
+        <h4>View Patients</h4>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="">
+                <table class="table border shadow">
+                    <thead style="background:green;">
+                        <th>Patient Name</th>
+                        <th>Patient Email</th>
+                        <th>Patient Address</th>
+                        <th>Patient Gender</th>
+                        <th>Patient Number</th> 
+                        <th>Patient Age</th> 
+                        <th>Remove</th>                  
+                    </thead>
+                    <tbody>
+                    {% for Patient in patlist %}
+                    <tr class="table-light">
+                        <td>{{Patient.pat_name|upper}}</td>
+                        <td>{{Patient.pat_email}}</td>
+                        <td>{{Patient.pat_address}}</td>
+                        <td>{{Patient.pat_gender}}</td>
+                        <td>{{Patient.pat_phone}}</td>
+                        <td>{{Patient.age}}</td>       
+                        <td><button type="button" class="btn btn-danger"><a href="{% url 'projectadmin:removepatient' Patient.id %} "class="link-light">remove</button></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    
+        </div>
+    </div>
+    </div>
+{% endblock %}

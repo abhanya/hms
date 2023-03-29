@@ -1,0 +1,43 @@
+{% extends 'pages/doctorhome.html' %}
+{% load static %}
+{% block content %}
+<div class="col-9 mt-5">
+<div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Your Appointments</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Appointment Date</th>
+            <th>Symptoms</th>
+            <th>Add description</th>
+          </tr>
+        </thead>
+        {% for app in appoinments %}
+        <tr>
+          <td>{{app.patient.pat_name}}</td>
+          <td>{{app.patient.pat_phone}}</td>
+          <td>{{app.patient.pat_address}}</td>
+          <td>{{app.booking_date}}</td>
+          <td>{{app.symptoms}}</td>
+          <td>
+            {% if not app.status %}
+            <a href="{% url 'doctor:addpres' app.id app.patient.id %}" class="btn btn-success link-light ms-4">Prescribe</a></td>
+            {% else %}
+            <p style="color:gray;"><b>Cunsulted</b></p>
+              {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+  
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

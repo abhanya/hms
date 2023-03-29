@@ -1,0 +1,28 @@
+{% extends 'pages\commonhome.html' %}
+{% load static %}
+{% block content%}
+<form method='POST'> 
+    {% csrf_token %}     
+          <div class="col-6 mx-auto my-auto">
+            <div class="container">
+              <div class="col-12 sm-8 md-6">
+                <div class="card shadow border p-3 mt-5">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">email</label>
+                    <input type="email" class="form-control w-50" id="exampleInputEmail1" aria-describedby="emailHelp" name="pmail">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control w-50" id="exampleInputPassword1" name="ppass">
+                  </div>
+                  <p>{{ msg }}</p>
+                  <button type="submit" class="btn btn-primary">Login</button><br><br>               
+                 <a href="{% url 'common:registration' %}">click here to register</a>
+                </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+  </form>
+  {% endblock %}

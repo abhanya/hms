@@ -1,0 +1,46 @@
+{% extends 'pages\adminhome.html' %}
+{% load static %}
+{% block content%}
+<div class="col-10 mt-5">
+    <div class="text-center p-4">
+        <h4>View docotors</h4>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="">
+                <table class="table border shadow">
+                    <thead style="background:green;">
+                        <th> Name</th>
+                        <th>Email Address</th>
+                        <th> Address</th>
+                        <th> Gender</th>
+                        <th> Number</th> 
+                        <th> DOB</th> 
+                        <th> State</th> 
+                        <th> Specialised</th> 
+                        <th>Remove</th>                  
+                    </thead>
+                    <tbody>
+                        {% for doctor in doclist %}
+                    <tr class="table-light">
+                        <td>{{doctor.doc_name|upper}}</td>
+                        <td>{{doctor.doc_email}}</td>
+                        <td>{{doctor.doc_address}}</td>
+                        <td>{{doctor.doc_gender}}</td>
+                        <td>{{doctor.doc_phone}}</td>
+                        <td>{{doctor.doc_dob}}</td>
+                        <td>{{doctor.doc_state}}</td>
+                        <td>{{doctor.department.departments}}</td>
+                        <td><button type="button" class="btn btn-danger"><a href="{% url 'projectadmin:removedoctor' doctor.id %} "class="link-light">remove</button></td>
+                    </tr>
+                    {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+    
+        </div>
+    </div>
+    </div>
+{% endblock %}

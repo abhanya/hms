@@ -1,0 +1,64 @@
+{% extends 'pages\patienthome.html' %}
+{% load static %}
+{% block content%}
+<div class="col-10 col-sm-8 col-md-6 m-auto">
+    <div class="card-light shadow border w-100 mt-5 mb-5">
+        <div class="card-body p-3">
+            <div>
+                <form method="POST" enctype = 'multipart/form-data'>
+                    {% csrf_token %}
+        
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input type="text" name="p_name" class="form-control" id="exampleFormControlInput1"
+                            value="{{pdata.pat_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" name="p_email" class="form-control" id="email"
+                            value="{{pdata.pat_email}}">
+                        <span id="email_error"></span>
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="exampleFormControlInput1" class="form-label">Gender :</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="p_gender" type="radio" name="inlineRadioOptions"
+                                id="inlineRadio1" value="male">
+                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="p_gender" type="radio" name="inlineRadioOptions"
+                                id="inlineRadio2" value="female">
+                            <label class="form-check-label" for="inlineRadio2">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="p_gender" type="radio" name="inlineRadioOptions"
+                                id="inlineRadio3" value="other">
+                            <label class="form-check-label" for="inlineRadio3">Other</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">age</label>
+                        <input class="form-control" type="text" id=""  name="page" value="{{pdata.age}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Adress</label>
+                        <input type="text" class="form-control" name="p_address" id="exampleFormControlTextarea1" rows="3"
+                            value="{{pdata.pat_address}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Phonenumber</label>
+                        <input type="text" name="p_number" class="form-control" id="exampleFormControlInput1"
+                            value="{{pdata.pat_phone}}">
+                    </div>
+
+                    <p style="color: green;"><b></b></p>
+                    <div class="card-footer align-content-center">
+                        <button type="submit" class="btn btn-success ">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

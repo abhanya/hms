@@ -1,0 +1,71 @@
+{% extends 'pages\patienthome.html' %}
+{% load static %}
+{% block content%}
+<form method='POST'> 
+    {% csrf_token %}     
+          <div class="col-8 mx-auto my-auto">
+            <div class="container">
+              <div class="col sm-8 md-6">
+                <div class="card shadow border p-3 mt-5">
+                    
+                  <label for="exampleInputEmail1" class="form-label">Symptoms</label>
+                   <textarea class="form-control " id="" name="symptoms" rows="3"></textarea><br>
+
+                    <label for="exampleFormControlInput1" class="form-label">type of cunsultion</label>
+                        <select name="consultion" id="cunsultiontype" class="border none" style="height:40px;">
+                          <option  disabled selected>please select</option>  
+                          {% for cunsult in bookinfo %}
+                            <option value="{{cunsult.id}}">{{cunsult.departments}}</option>
+                          {% endfor %}      
+                        </select><br>
+
+                        <label for="exampleFormControlInput1" class="form-label">Choose your Doctor</label>
+                        <select name="doct" id="doctt" class="border none" style="height:40px;">                              
+                        
+                        </select><br>
+
+                    <label for="exampleInputEmail1" class="form-label">Date Appoinment</label>
+                    <input type="date" class="form-control " id="date" name="date"><br>
+
+                    {{ msg }}
+                    
+                    <button type="submit" class="btn btn-success" id="submit">Book</button>
+                </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+  </form>
+  <script>
+    $(document).ready(function(){
+      $.ajaxSetup({
+        headers: {
+            "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val() 
+        }
+    })
+    $('#cunsultiontype').change(function(){
+      var dep_id = $('#cunsultiontype').val()
+    
+      console.log(dep_id)
+      $.ajax({
+        type: 'POST',
+        url:"{% url 'patient:getdoctor' %}",
+        data:{'keydep':dep_id},
+
+        success:function(response){
+          data = response.data
+          console.log(data)
+          $('#doctt').empty()
+          $('#doctt').append($('<option>').text('Select a doctor'))
+          for(doctor in data){
+            console.log(doctor)
+            console.log(data[doctor].name)     
+            var option=$('<option>').text(data[doctor].name).attr('value',data[doctor].id)
+              $('#doctt').append(option)
+          }
+        }
+      })
+    })
+    })
+  </script>
+{% endblock %}
